@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   esbuild: {
-    loader: 'jsx', // REMOVE this if you're not importing .js files with JSX
+    loader: 'tsx',
   },
 })
