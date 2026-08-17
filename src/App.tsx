@@ -8,16 +8,15 @@ import Contact from './pages/Contact'
 import Footer from './components/Footer'
 
 function App(): ReactElement {
-
   return (
     <>
-      <Header/>
-      <Home/>
-      <About/>
-      <Projects/>
-      <Services/>
-      <Contact/>
-      <Footer/>
+      <Header />
+      <Home />
+      <About />
+      <Projects />
+      <Services />
+      <Contact />
+      <Footer />
     </>
   )
 }

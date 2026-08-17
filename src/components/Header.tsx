@@ -1,35 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react'
 
 const Header = () => {
-  const [activeSection, setActiveSection] = useState('Home');
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('Home')
+  const [menuOpen, setMenuOpen] = useState<boolean>(false)
 
   useEffect(() => {
-    const sections = document.querySelectorAll('section');
-    const options = {
+    const sections = document.querySelectorAll('section')
+    const options: IntersectionObserverInit = {
       rootMargin: '0px',
       threshold: 0.2,
-    };
+    }
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          setActiveSection(entry.target.id)
         }
-      });
-    }, options);
+      })
+    }, options)
 
-    sections.forEach(section => observer.observe(section));
+    sections.forEach((section) => observer.observe(section))
+
     return () => {
-      sections.forEach(section => observer.unobserve(section));
-    };
-  }, []);
+      sections.forEach((section) => observer.unobserve(section))
+    }
+  }, [])
 
-  const handleNavClick = () => setMenuOpen(false);
+  const handleNavClick = (): void => setMenuOpen(false)
 
   return (
     <header className="header">
-      <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+      <div
+        className="menu-toggle"
+        onClick={() => setMenuOpen((open) => !open)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            setMenuOpen((open) => !open)
+          }
+        }}
+      >
         ☰
       </div>
       <nav className={`nav ${menuOpen ? 'open' : ''}`}>
@@ -40,7 +52,7 @@ const Header = () => {
         <a href="#Contact" onClick={handleNavClick} className={activeSection === 'Contact' ? 'active' : ''}>Contact</a>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
