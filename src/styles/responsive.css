@@ -1,139 +1,136 @@
-@media (prefers-color-scheme: light) {
-    :root {
-      color: #213547;
-      background-color: #ffffff;
-    }
-    a:hover {
-      color: #747bff;
-    }
-    button {
-      background-color: #f9f9f9;
-    }
-  }
-  
-  /* 📱 Responsive for mobile screens */
-  @media (max-width: 768px) {
+  @media (max-width: 760px) {
     .header {
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      padding: 20px;
+      padding: 14px 18px;
+      gap: 10px;
     }
-  
+
     .menu-toggle {
-      display: block;
-      align-self: flex-start;
-      font-size: 28px;
-      color: white;
+      display: inline-flex;
+      justify-self: start;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: none;
+      color: var(--color-text);
+      font-size: 24px;
       cursor: pointer;
     }
-  
+
     .nav {
       position: absolute;
-      top: 70px; /* adjust if needed */
-      left: 50%;
-      transform: translateX(-50%);
-      flex-direction: column;
-      background: rgba(15, 15, 15, 0.95);
-      width: 100%;
-      padding: 20px 0;
-      align-items: center;
-      justify-content: center;
+      left: 18px;
+      right: 18px;
+      top: calc(100% + 8px);
       display: none;
-      text-align: center;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 18px 16px;
+      border-radius: 16px;
+      background: rgba(13, 15, 21, 0.9);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
+      border: none;
     }
-  
+
     .nav.open {
       display: flex;
     }
-  
+
     .nav a {
-      margin: 10px 0;
+      margin: 0;
+      width: 100%;
+      padding: 8px 0;
+      font-size: 0.98rem;
     }
-  
+
+    .header-actions {
+      justify-self: end;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .site-footer {
+      padding: 24px 20px 16px;
+    }
+
+    .footer-inner,
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-links,
+    .footer-connect {
+      width: 100%;
+    }
+
+    .footer-bottom {
+      margin-top: 22px;
+    }
+  }
+
+  @media (max-width: 980px) {
     .Home {
       flex-direction: column;
-      padding: 100px 20px;
-      height: auto;
-      gap: 40px;
-    }
-  
-    .Home-LeftSide {
-      max-width: 100%;
-      width: 100%;
+      justify-content: center;
       text-align: center;
+      padding-top: 160px;
     }
-  
-    .Home-LeftSide h1 {
-      font-size: 2rem;
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
     }
-  
-    .Home-LeftSide h3 {
-      font-size: 1.2rem;
+
+    .Home-LeftSide,
+    .Home-RightSide {
+      width: 100%;
+      max-width: 720px;
+      flex: 1 1 auto;
     }
-  
-    .Home-LeftSide p {
+
+    .Home-RightSide {
+      order: -1;
+    }
+
+    .Home-LeftSide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       max-width: 100%;
-      margin: 10px auto;
     }
-  
+
+    .hero-bio {
+      max-width: 620px;
+    }
+
+    .hero-intro,
+    .hero-actions,
+    .hero-status {
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .Home {
+      padding-top: 150px;
+      padding-bottom: 48px;
+    }
+
+    .Home-LeftSide {
+      min-height: auto;
+    }
+
     .set {
       justify-content: center;
     }
-  
-    .download-button {
-      margin: 20px 0 0 0;
-      display: inline-block;
-    }
-  
-    .Home-RightSide {
-      width: 100%;
-      height: auto;
-    }
-    
-    .About {
-      flex-direction: column;
-      padding: 20px;
-    }
-  
-    .About-LeftSide,
-    .About-RightSide {
-      max-width: 100%;
-      width: 100%;
-    }
-  
-    .code-block {
-      font-size: 14px;
-      padding: 15px;
-    }
-  
-    .About-LeftSide {
-      padding: 15px;
-    }
 
-    .modal-content {
-      padding: 1.5rem 1rem;
-      border-radius: 12px;
-    }
-  
-    .modal-title {
-      font-size: 1.3rem;
-    }
-  
-    .modal-price {
-      font-size: 0.95rem;
-    }
-  
-    .modal-description,
-    .modal-details {
-      font-size: 0.9rem;
-    }
-  
-    .modal-close {
-      font-size: 20px;
-    }
-  
-    .modal-section h4 {
-      font-size: 1rem;
+    .Home-RightSide {
+      height: 280px;
     }
   }
-  
+

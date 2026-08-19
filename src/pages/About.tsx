@@ -7,86 +7,256 @@ import {
   PlatformsList,
 } from '../data/projectData'
 
+function SkillGroup({
+  title,
+  description,
+  items,
+}: {
+  title: string
+  description: string
+  items: any[]
+}) {
+  return (
+    <div className="skill-group">
+      <div className="skill-group-header">
+        <div>
+          <h3>{title}</h3>
+          <span>{description}</span>
+        </div>
+
+        <span className="skill-count">
+          {items.length.toString().padStart(2, '0')}
+        </span>
+      </div>
+
+      <div className="skills-container">
+        {items.map((item, index) => (
+          <SkillsIcon
+            key={`${item.iconName}-${index}`}
+            {...item}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function About() {
+  const frameworkAndRuntime = [
+    ...FrameworksList,
+    ...RuntimeList,
+  ]
+
   return (
     <section className="About" id="About">
-      <div className="About-LeftSide animate-on-scroll">
-        <pre className="code-block">
-          <code>
-            README.md<br />
-            <br />
-            <span style={{ color: '#FF9F1C' }}>[About me ?]</span>
-            <br />
-            <br />
-            Hi, I am Patrick B. Comon (aka <span style={{ color: '#4BF3FF' }}>Khur0o</span>).<br />
-            <br />
-            <br />
-            <br />
-            With expertise in web development, application development, game mechanics and multimedia design, I love crafting functional and engaging projects.<br />
-            <br />
-            <br />
-            <br />
-            <span style={{ color: '#FF9F1C' }}>[Contact ?]</span>
-            <br />
-            <br />
-            Email : <span style={{ color: '#32CD32' }}>pcomon35@gmail.com </span>
-            <br />
-            Mobile : <span style={{ color: '#32CD32' }}>+639911969814 </span>
-            <br />
-            <br />
-            <br />
-            <span style={{ color: '#FF9F1C' }}>[Interest / Hobbies ?]</span>
-            <br />
-            <br />
-            I enjoy coding, exploring new technologies, and developing games in Unity, especially working with 3D environments and gameplay mechanics.<br />
-            <br />
-            I'm also passionate about multimedia creation, including video editing, 2D animation, 3D modeling, digital painting, and designing posters and fanart.<br />
-            <br />
-            When I’m not working on projects, I like playing video games, watching anime and movies, read manga also learning about new design trends and creative<br />
-            techniques.<br />
-            <br />
-            <br />
-            <br />
-            <br />
-          </code>
-        </pre>
+
+      {/* =========================
+          INTRO
+      ========================== */}
+      <div className="about-header animate-on-scroll">
+
+        <div className="about-heading">
+          <h2>
+            Engineering with
+            <span> creativity in mind.</span>
+          </h2>
+        </div>
+
+        <p className="about-summary">
+          I'm Patrick B. Comon, known online as{' '}
+          <strong>Khur0o</strong> — a software engineer and
+          game developer interested in building practical,
+          thoughtful, and engaging digital experiences.
+        </p>
+
       </div>
 
-      <div className="About-RightSide animate-on-scroll">
-        <h2>Technical Skills</h2>
-        <p>Programming Languages</p>
 
-        <div className="skills-container">
-          {LanguagesList.map((lang, index) => (
-            <SkillsIcon key={`${lang.iconName}-${index}`} {...lang} />
-          ))}
+      {/* =========================
+          PROFILE
+      ========================== */}
+      <div className="about-main">
+
+        <div className="about-profile animate-on-scroll">
+
+          <div className="profile-top">
+            <span className="profile-label">
+              PROFILE
+            </span>
+
+            <span className="profile-status">
+              <i />
+              Building & Learning
+            </span>
+          </div>
+
+          <div className="profile-content">
+
+            <h3>
+              I like building things
+              <br />
+              from the ground up.
+            </h3>
+
+            <p>
+              My work sits between software engineering,
+              game development, and digital design. I enjoy
+              turning an idea into a working system, refining
+              the details, and making the final experience
+              feel intentional rather than template-made.
+            </p>
+
+            <p>
+              I'm particularly interested in game systems,
+              interactive experiences, web applications,
+              3D environments, and creative technology.
+            </p>
+
+          </div>
+
+
+          <div className="profile-focus">
+
+            <div className="focus-item">
+              <span className="focus-number">01</span>
+
+              <div>
+                <strong>Software Engineering</strong>
+                <p>
+                  Building maintainable applications,
+                  APIs, and practical systems.
+                </p>
+              </div>
+            </div>
+
+            <div className="focus-item">
+              <span className="focus-number">02</span>
+
+              <div>
+                <strong>Game Development</strong>
+                <p>
+                  Designing mechanics, systems,
+                  environments, and playable experiences.
+                </p>
+              </div>
+            </div>
+
+            <div className="focus-item">
+              <span className="focus-number">03</span>
+
+              <div>
+                <strong>Creative Technology</strong>
+                <p>
+                  Combining development, illustration,
+                  design, and experimentation.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
-        <p>Frameworks and Runtime Environment</p>
-        <div className="skills-container">
-          {FrameworksList.map((framework, index) => (
-            <SkillsIcon key={`${framework.iconName}-${index}`} {...framework} />
-          ))}
 
-          {RuntimeList.map((env, index) => (
-            <SkillsIcon key={`${env.iconName}-${index}`} {...env} />
-          ))}
-        </div>
+        {/* =========================
+            APPROACH
+        ========================== */}
+        <aside className="about-approach animate-on-scroll">
 
-        <p>Databases</p>
-        <div className="skills-container">
-          {DatabasesList.map((db, index) => (
-            <SkillsIcon key={`${db.iconName}-${index}`} {...db} />
-          ))}
-        </div>
+          <span className="about-kicker">
+            Approach
+          </span>
 
-        <p>Tools and Platforms</p>
-        <div className="skills-container">
-          {PlatformsList.map((tool, index) => (
-            <SkillsIcon key={`${tool.iconName}-${index}`} {...tool} />
-          ))}
-        </div>
+          <h3>
+            Useful.
+            <br />
+            Intentional.
+            <br />
+            Memorable.
+          </h3>
+
+          <p>
+            I prefer solutions that have a reason
+            behind them — from architecture and
+            interaction to the smallest visual detail.
+          </p>
+
+          <div className="approach-line">
+            <span>01</span>
+            Understand
+          </div>
+
+          <div className="approach-line">
+            <span>02</span>
+            Design
+          </div>
+
+          <div className="approach-line">
+            <span>03</span>
+            Build
+          </div>
+
+          <div className="approach-line">
+            <span>04</span>
+            Refine
+          </div>
+
+        </aside>
+
       </div>
+
+
+      {/* =========================
+          TECH STACK
+      ========================== */}
+      <div className="technical-section animate-on-scroll">
+
+        <div className="technical-header">
+
+          <div>
+            <h2>
+              Technical Skills
+            </h2>
+          </div>
+
+          <p>
+            Technologies and tools I use to turn
+            ideas into working products.
+          </p>
+
+        </div>
+
+
+        <div className="skills-layout">
+
+          <SkillGroup
+            title="Languages"
+            description="Core programming languages"
+            items={LanguagesList}
+          />
+
+          <SkillGroup
+            title="Frameworks & Runtime"
+            description="Application development"
+            items={frameworkAndRuntime}
+          />
+
+          <SkillGroup
+            title="Databases"
+            description="Data & persistence"
+            items={DatabasesList}
+          />
+
+          <SkillGroup
+            title="Tools & Platforms"
+            description="Development ecosystem"
+            items={PlatformsList}
+          />
+
+        </div>
+
+      </div>
+
     </section>
   )
 }

@@ -121,6 +121,18 @@ export const ProjectsLists: ProjectItem[] = [
     CardLanguages: 'Unity, C#, Path-finding',
     Github_SRC: 'https://github.com/Khur0o/RIDEOUT-XENOGENESIS',
   },
+  {
+    source: RIDEOUT_XENOGENESIS,
+    CardTitle: 'RIDEOUT-XENOGENESIS',
+    CardLanguages: 'Unity, C#, Path-finding',
+    Github_SRC: 'https://github.com/Khur0o/RIDEOUT-XENOGENESIS',
+  },
+  {
+    source: RIDEOUT_XENOGENESIS,
+    CardTitle: 'RIDEOUT-XENOGENESIS',
+    CardLanguages: 'Unity, C#, Path-finding',
+    Github_SRC: 'https://github.com/Khur0o/RIDEOUT-XENOGENESIS',
+  },
 ]
 
 export const serviceDetails: ServiceDetail[] = [

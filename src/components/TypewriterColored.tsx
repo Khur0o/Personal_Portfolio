@@ -43,7 +43,7 @@ const TypewriterColored = ({ segments, speed = 40 }: TypewriterColoredProps) => 
   }, [charIndex, segmentIndex, segments, speed])
 
   return (
-    <p style={{ fontFamily: 'Courier Prime', fontSize: '1rem', color: 'white' }}>
+    <p style={{ fontSize: '1rem', color: 'var(--color-text)' }}>
       {typed.map((seg, index) => (
         <span key={`${seg.text}-${index}`} style={{ color: seg.color }}>
           {seg.text}
