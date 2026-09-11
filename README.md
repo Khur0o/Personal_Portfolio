@@ -1,12 +1,60 @@
-# React + Vite
+# Khur0o Dev — Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive personal portfolio built with React, TypeScript, and Vite. The portfolio presents my work and experience across software engineering, game development, and creative technology.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project serves as my personal portfolio and provides an overview of my technical skills, selected projects, and development work.
 
-## Expanding the ESLint configuration
+The application is designed as a responsive single-page experience with support for both light and dark themes, reusable components, client-side navigation, and responsive layouts for desktop, tablet, and mobile devices.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- React and TypeScript based component architecture
+- Vite development and build environment
+- Responsive layouts for desktop, tablet, and mobile
+- Light and dark theme support
+- Persistent theme preferences using local storage
+- Smooth section navigation
+- Intersection Observer-based scroll animations
+- Client-side project navigation
+- Project archive with category filtering
+- Individual project detail pages
+- Reusable UI components
+- CSS custom properties for theme and design management
+- Production build optimization
+
+## Technology Stack
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- HTML5
+- CSS3
+
+### Development
+
+- Node.js
+- npm
+- Git
+- GitHub
+
+## Getting Started
+
+### Prerequisites
+
+The following software is required:
+
+- Node.js 16 or later
+- npm
+
+### Installation
+
+Clone the repository and install the project dependencies:
+
+```bash
+git clone https://github.com/Khur0o/<repository-name>.git
+cd <repository-name>
+npm install
