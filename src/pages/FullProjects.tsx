@@ -1,54 +1,43 @@
 import ProjectCard from '../components/ProjectCard'
+import { ProjectsLists } from '../data/projectData'
 
 function ProjectsPage() {
-  const fullProjects = [
-    {
-      source: '/assets/youtube-converter.jpg',
-      CardTitle: 'YouTube Converter',
-      CardLanguages: 'React, Node.js, FFmpeg, Firebase',
-      Github_SRC: '#',
-    },
-    {
-      source: '/assets/inventory-system.jpg',
-      CardTitle: 'Inventory System',
-      CardLanguages: 'PHP, MySQL, JavaScript',
-      Github_SRC: '#',
-    },
-    {
-      source: '/assets/survival-game.jpg',
-      CardTitle: 'Survival Game',
-      CardLanguages: 'Unity, C#',
-      Github_SRC: '#',
-    },
-    {
-      source: '/assets/youtube-converter.jpg',
-      CardTitle: 'YouTube Converter',
-      CardLanguages: 'React, Node.js, FFmpeg, Firebase',
-      Github_SRC: '#',
-    },
-    {
-      source: '/assets/inventory-system.jpg',
-      CardTitle: 'Inventory System',
-      CardLanguages: 'PHP, MySQL, JavaScript',
-      Github_SRC: '#',
-    },
-    {
-      source: '/assets/survival-game.jpg',
-      CardTitle: 'Survival Game',
-      CardLanguages: 'Unity, C#',
-      Github_SRC: '#',
-    },
-  ]
-
   return (
-    <section className="ProjectsPage">
-      <h2 className="section-title">All Projects</h2>
-      <div className="project-grid">
-        {fullProjects.map((project, index) => (
-          <ProjectCard key={`${project.CardTitle}-${index}`} {...project} />
+    <main className="ProjectsPage">
+      <header className="projects-page-header">
+        <span className="projects-kicker">
+          Project Archive / 01
+        </span>
+
+        <h1>
+          All
+          <span> Projects.</span>
+        </h1>
+
+        <p>
+          A collection of projects I've built, experimented
+          with, and contributed to across software engineering,
+          game development, and creative technology.
+        </p>
+      </header>
+
+      <div className="projects-page-meta">
+        <span>PROJECT ARCHIVE</span>
+
+        <span>
+          {ProjectsLists.length.toString().padStart(2, '0')} PROJECTS
+        </span>
+      </div>
+
+      <div className="project-grid project-grid-full">
+        {ProjectsLists.map((project, index) => (
+          <ProjectCard
+            key={`${project.CardTitle}-${index}`}
+            {...project}
+          />
         ))}
       </div>
-    </section>
+    </main>
   )
 }
 

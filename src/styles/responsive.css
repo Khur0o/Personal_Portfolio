@@ -93,10 +93,6 @@
       flex: 1 1 auto;
     }
 
-    .Home-RightSide {
-      order: -1;
-    }
-
     .Home-LeftSide {
       display: flex;
       flex-direction: column;
@@ -134,3 +130,234 @@
     }
   }
 
+/* =========================================================
+   PROJECTS / TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .projects-header {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .projects-header > p {
+    max-width: 650px;
+  }
+
+  .project-grid,
+  .project-grid-full {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .projects-page-header {
+    margin-bottom: 55px;
+  }
+}
+
+
+/* =========================================================
+   PROJECTS / MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .Projects {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    padding:
+      80px
+      18px;
+  }
+
+  .projects-header {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .projects-header h2 {
+    font-size: clamp(3rem, 15vw, 4.5rem);
+  }
+
+  .projects-header > p {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .projects-meta,
+  .projects-page-meta {
+    width: 100%;
+
+    gap: 15px;
+
+    font-size: 0.55rem;
+  }
+
+  .project-grid,
+  .project-grid-full {
+    width: 100%;
+    min-width: 0;
+
+    grid-template-columns:
+      minmax(0, 1fr);
+
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .card-image {
+    height: 220px;
+  }
+
+  .card-details {
+    padding: 20px;
+  }
+
+  .see-more-container {
+    margin-top: 35px;
+  }
+
+  .ProjectsPage {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    padding:
+      90px
+      18px
+      70px;
+
+    overflow: hidden;
+  }
+
+  .projects-page-header {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .projects-page-header h1 {
+    font-size: clamp(4rem, 19vw, 6rem);
+  }
+
+  .projects-page-header p {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .projects-meta,
+  .projects-page-meta {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 5px;
+  }
+
+  .card-image {
+    height: 200px;
+  }
+}
+
+/* SERVICES RESPONSIVE */
+
+@media (max-width: 900px) {
+  .services-header {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .services-header > p {
+    max-width: 600px;
+  }
+
+  .service-item {
+    grid-template-columns:
+      55px
+      minmax(0, 1fr)
+      auto;
+
+    gap: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .Services {
+    padding: 80px 18px;
+  }
+
+  .services-header {
+    margin-bottom: 40px;
+  }
+
+  .services-header h2 {
+    font-size: 2.7rem;
+  }
+
+  .service-item {
+    grid-template-columns: 40px 1fr;
+    gap: 14px;
+
+    min-height: 150px;
+
+    padding: 25px 0;
+  }
+
+  .service-item:hover {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .service-content h3 {
+    font-size: 1.6rem;
+  }
+
+  .service-content p {
+    font-size: 0.85rem;
+  }
+
+  .service-meta {
+    grid-column: 2;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-top: 5px;
+  }
+
+  .service-meta > span:first-child {
+    font-size: 0.65rem;
+  }
+
+  .service-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .modal-content {
+    padding: 28px 22px;
+  }
+
+  .modal-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .modal-price {
+    margin-top: 0;
+  }
+}

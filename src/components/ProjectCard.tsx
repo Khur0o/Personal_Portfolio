@@ -1,29 +1,47 @@
 type ProjectCardProps = {
- source?: string
- CardImg?: string
- CardTitle?: string
- CardLanguages?: string
- Github_SRC?: string
+  source?: string
+  CardImg?: string
+  CardTitle?: string
+  CardDescription?: string
+  slug?: string
+  onClick?: () => void
 }
 
 function ProjectCard({
- source,
- CardImg,
- CardTitle = 'Project',
- CardLanguages = '',
- Github_SRC = '#',
+  source,
+  CardImg,
+  CardTitle = 'Project',
+  CardDescription = '',
+  slug = '',
+  onClick,
 }: ProjectCardProps) {
- const imageSource = source ?? CardImg ?? ''
+  const imageSource = source ?? CardImg ?? ''
 
- return (
-   <a href={Github_SRC} target="_blank" rel="noopener noreferrer" className="card">
-     <img className="card-image" src={imageSource} alt={CardTitle} />
-     <div className="card-details">
-       <h2>{CardTitle}</h2>
-       <p>{CardLanguages}</p>
-     </div>
-   </a>
- )
+  const handleClick = () => {
+    if (onClick) {
+      onClick()
+    } else if (slug) {
+      window.location.hash = `#/project/${slug}`
+    }
+  }
+
+  return (
+    <div className="card" onClick={handleClick} style={{ cursor: slug ? 'pointer' : 'default' }}>
+      <div className="card-image-wrapper">
+        <img
+          className="card-image"
+          src={imageSource}
+          alt={CardTitle}
+        />
+      </div>
+
+      <div className="card-details">
+        <h2>{CardTitle}</h2>
+
+        <p>{CardDescription}</p>
+      </div>
+    </div>
+  )
 }
 
 export default ProjectCard

@@ -54,8 +54,33 @@ const Header = () => {
 
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
 
-  const handleNavClick = (): void => setMenuOpen(false)
-  const getSectionHref = (section: string): string => `/#${section}`
+  const handleNavClick = (section: string) => (event: React.MouseEvent<HTMLAnchorElement>): void => {
+    event.preventDefault()
+    setMenuOpen(false)
+
+    const target = section === 'Home' ? '/' : `/#${section}`
+    const currentPath = window.location.pathname
+    const currentHash = window.location.hash
+
+    if (currentPath !== '/' && currentPath !== '/index.html') {
+      window.location.assign(target)
+      return
+    }
+
+    if (currentHash === `#${section}`) {
+      const element = document.getElementById(section)
+      element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      return
+    }
+
+    window.history.pushState(null, '', target)
+    const element = document.getElementById(section)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  const getSectionHref = (section: string): string => (section === 'Home' ? '/' : `/#${section}`)
 
   return (
     <header className="header">
@@ -74,11 +99,11 @@ const Header = () => {
         ☰
       </div>
       <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-        <a href={getSectionHref('Home')} onClick={handleNavClick} className={activeSection === 'Home' ? 'active' : ''}>Home</a>
-        <a href={getSectionHref('About')} onClick={handleNavClick} className={activeSection === 'About' ? 'active' : ''}>About</a>
-        <a href={getSectionHref('Projects')} onClick={handleNavClick} className={activeSection === 'Projects' ? 'active' : ''}>Projects</a>
-        <a href={getSectionHref('Services')} onClick={handleNavClick} className={activeSection === 'Services' ? 'active' : ''}>Services</a>
-        <a href={getSectionHref('Contact')} onClick={handleNavClick} className={activeSection === 'Contact' ? 'active' : ''}>Contact</a>
+        <a href={getSectionHref('Home')} onClick={handleNavClick('Home')} className={activeSection === 'Home' ? 'active' : ''}>Home</a>
+        <a href={getSectionHref('About')} onClick={handleNavClick('About')} className={activeSection === 'About' ? 'active' : ''}>About</a>
+        <a href={getSectionHref('Projects')} onClick={handleNavClick('Projects')} className={activeSection === 'Projects' ? 'active' : ''}>Projects</a>
+        <a href={getSectionHref('Services')} onClick={handleNavClick('Services')} className={activeSection === 'Services' ? 'active' : ''}>Services</a>
+        <a href={getSectionHref('Contact')} onClick={handleNavClick('Contact')} className={activeSection === 'Contact' ? 'active' : ''}>Contact</a>
       </nav>
 
       <div className="header-actions">

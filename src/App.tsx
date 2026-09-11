@@ -7,6 +7,8 @@ import Services from './pages/Services'
 import Contact from './pages/Contact'
 import Footer from './components/Footer'
 import NotFound from './pages/NotFound'
+import AllProjects from './pages/AllProjects'
+import ProjectDetail from './pages/ProjectDetail'
 
 function App(): ReactElement {
   useEffect(() => {
@@ -34,9 +36,56 @@ function App(): ReactElement {
   }, [])
 
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/'
+  const currentHash = typeof window !== 'undefined' ? window.location.hash : ''
   const isRootPath = currentPath === '/' || currentPath === '/index.html'
 
-  if (!isRootPath) {
+  useEffect(() => {
+    if (!currentHash) return
+
+    const cleanHash = currentHash.replace('#', '')
+
+    // Handle special routes
+    if (cleanHash.startsWith('/project/') || cleanHash === '/all-projects') {
+      return
+    }
+
+    const target = document.getElementById(cleanHash)
+    if (!target) return
+
+    const frame = window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [currentHash, currentPath])
+
+  // Determine which page to show
+  const cleanHash = currentHash.replace('#', '')
+
+  // Show Project Detail page
+  if (cleanHash.startsWith('/project/')) {
+    return (
+      <>
+        <Header />
+        <ProjectDetail />
+        <Footer />
+      </>
+    )
+  }
+
+  // Show All Projects page
+  if (cleanHash === '/all-projects') {
+    return (
+      <>
+        <Header />
+        <AllProjects />
+        <Footer />
+      </>
+    )
+  }
+
+  // Show 404 only if NOT on root path and NOT using hash navigation
+  if (!isRootPath && !currentHash) {
     return (
       <>
         <Header />
@@ -46,6 +95,7 @@ function App(): ReactElement {
     )
   }
 
+  // Always show portfolio when on root path or when using hash navigation
   return (
     <>
       <Header />

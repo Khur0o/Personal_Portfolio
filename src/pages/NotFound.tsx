@@ -9,7 +9,7 @@ function NotFound() {
         </p>
 
         <div className="not-found-actions">
-          <a href="/" className="button">
+          <a href="/" className="hero-button">
             Go back home
           </a>
           <a href="/#Contact" className="secondary-link">

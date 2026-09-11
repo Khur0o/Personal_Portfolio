@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import underConstruction from '../assets/images/try.png'
+import underConstruction from '../assets/images/under-construction-warning-sign.png'
 
 function Home() {
   const imageRef = useRef<HTMLImageElement | null>(null)
@@ -30,7 +30,7 @@ function Home() {
   }
 
   return (
-    <section className="Home" id="Home">
+    <section className="Home animate-on-scroll" id="Home">
       <div className="hero-grid">
         {/* LEFT */}
         <div className="Home-LeftSide">
@@ -38,18 +38,9 @@ function Home() {
             <span className="hero-greeting">
               Hello, I'm
             </span>
-
             <h1>
               Khur0o
             </h1>
-
-            <div className="hero-roles">
-              <span>Software Engineer</span>
-              <i>·</i>
-              <span>Game Developer</span>
-              <i>·</i>
-              <span>Creative Technologist</span>
-            </div>
           </div>
 
           <p className="hero-bio">
@@ -132,6 +123,7 @@ function Home() {
 
 <br /><br /><br /><br />
       <div className="hero-scroll">
+        <span className="hero-scroll-line" />
         <span>SCROLL TO EXPLORE</span>
         <span className="hero-scroll-line" />
       </div>
