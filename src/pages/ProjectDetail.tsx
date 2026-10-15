@@ -1,111 +1,123 @@
-import { useEffect, useState } from 'react'
-import { ProjectsLists, type ProjectItem } from '../data/projectData'
+import { ProjectsLists } from '../data/projectData'
+import ProjectCard from '../components/ProjectCard'
 import '../styles/project-detail.css'
 
-function ProjectDetail() {
-  const [project, setProject] = useState<ProjectItem | null>(null)
+type ProjectDetailProps = {
+  slug: string
+}
 
-  useEffect(() => {
-    const hash = window.location.hash
-    const slug = hash.replace('#/project/', '')
-    
-    const foundProject = ProjectsLists.find((p) => p.slug === slug)
-    setProject(foundProject || null)
-  }, [])
+function ProjectDetail({ slug }: ProjectDetailProps) {
+  const project = ProjectsLists.find((item) => item.slug === slug)
 
   if (!project) {
     return (
-      <div className="project-detail-page">
-        <div className="detail-container">
-          <div className="project-not-found">
-            <h1>Project Not Found</h1>
-            <p>Sorry, the project you're looking for doesn't exist.</p>
-            <a href="/#Projects" className="back-link">
-              ← Back to Projects
-            </a>
-          </div>
+      <main className="project-detail-page">
+        <div className="detail-container project-not-found">
+          <span className="projects-kicker">Project Archive / 404</span>
+          <h1>Project not found.</h1>
+          <p>That project may have moved, or the link may be out of date.</p>
+          <a href="#/all-projects" className="detail-action">
+            Browse all projects <span aria-hidden="true">↗</span>
+          </a>
         </div>
-      </div>
+      </main>
     )
   }
 
-  return (
-    <div className="project-detail-page">
-      <div className="detail-container">
-        <div className="detail-header">
-          <a href="/#Projects" className="back-link">
-            ← Back to Projects
-          </a>
-          <h1>{project.CardTitle}</h1>
-        </div>
+  const relatedProjects = ProjectsLists.filter((item) => item.slug !== project.slug)
+  const projectNumber = ProjectsLists.findIndex((item) => item.slug === project.slug) + 1
 
-        <div className="detail-hero">
-          <img src={project.source} alt={project.CardTitle} className="detail-image" />
-        </div>
+  return (
+    <main className="project-detail-page">
+      <div className="detail-container">
+        <a href="#/all-projects" className="archive-back-link">
+          <span aria-hidden="true">←</span> Back to all projects
+        </a>
+
+        <header className="detail-header">
+          <span className="projects-kicker">
+            Project {projectNumber.toString().padStart(2, '0')} /{' '}
+            {project.category}
+          </span>
+          <h1>{project.CardTitle}</h1>
+          <p>{project.CardDescription}</p>
+        </header>
+
+        <figure className="detail-hero">
+          <img
+            src={project.source}
+            alt={`${project.CardTitle} project preview`}
+            className="detail-image"
+          />
+        </figure>
 
         <div className="detail-content">
-          <div className="detail-info">
-            <div className="info-section">
-              <h2>About Project</h2>
-              <p className="full-description">
-                {project.fullDescription || project.CardDescription}
-              </p>
-            </div>
+          <section className="detail-description">
+            <span className="detail-label">ABOUT THE PROJECT</span>
+            <p>{project.fullDescription || project.CardDescription}</p>
+          </section>
 
-            <div className="info-grid">
-              <div className="info-card">
-                <h3>Category</h3>
-                <p className="category-badge">{project.category}</p>
+          <aside className="detail-sidebar">
+            <div className="detail-facts">
+              <div className="detail-fact">
+                <span className="detail-label">CATEGORY</span>
+                <p>{project.category}</p>
               </div>
-
-              <div className="info-card">
-                <h3>Type</h3>
+              <div className="detail-fact">
+                <span className="detail-label">TYPE</span>
                 <p>{project.Type}</p>
               </div>
-
-              <div className="info-card">
-                <h3>Status</h3>
-                <p className={`status-badge ${project.Status.toLowerCase()}`}>
-                  {project.Status}
-                </p>
+              <div className="detail-fact">
+                <span className="detail-label">STATUS</span>
+                <p>{project.Status}</p>
               </div>
             </div>
 
-            <div className="info-section">
-              <h2>Technologies Used</h2>
+            <div className="detail-technologies">
+              <span className="detail-label">BUILT WITH</span>
               <div className="technologies-list">
-                {project.technologies.map((tech, index) => (
-                  <span key={index} className="tech-tag">
-                    {tech}
+                {project.technologies.map((technology) => (
+                  <span key={technology} className="tech-tag">
+                    {technology}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="info-section">
-              <h2>Project Links</h2>
-              <div className="project-links">
-                <a
-                  href={project.Github_SRC}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-link"
-                >
-                  <span>🔗</span> View on GitHub
-                </a>
-              </div>
-            </div>
-          </div>
+            <a
+              href={project.Github_SRC}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="detail-action"
+            >
+              View source on GitHub
+            </a>
+          </aside>
         </div>
 
-        <div className="related-projects">
-          <h2>More Projects</h2>
-          <a href="/#Projects" className="view-all-btn">
-            View All Projects
-          </a>
-        </div>
+        {relatedProjects.length > 0 && (
+          <section className="related-projects">
+            <div className="related-projects-heading">
+              <div>
+                <span className="projects-kicker">Keep exploring</span>
+                <h2>More projects.</h2>
+              </div>
+              <a href="#/all-projects" className="related-all-link">
+                View the archive
+              </a>
+            </div>
+            <div className="project-grid related-project-grid">
+              {relatedProjects.slice(0, 2).map((relatedProject) => (
+                <ProjectCard
+                  key={relatedProject.slug}
+                  {...relatedProject}
+                />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
-    </div>
+    </main>
   )
 }
 

@@ -1,169 +1,87 @@
-/* All Projects Page Styles */
-
-.all-projects-page {
-  min-height: 100vh;
-  padding: 3rem 1rem;
-  background: var(--bg-color);
-  color: var(--text-color);
+.projects-page-header {
+  margin-bottom: 55px;
 }
 
-.all-projects-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding: 2rem 0;
+.projects-page-header h1 span {
+  display: inline-block;
 }
 
-.all-projects-header h1 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.projects-page-meta {
+  margin-bottom: 20px;
 }
 
-.all-projects-header p {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Category Filter */
 .category-filter {
   display: flex;
-  justify-content: center;
-  margin-bottom: 3rem;
+  justify-content: flex-start;
+  margin: 0 0 28px;
 }
 
 .category-buttons {
   display: flex;
-  gap: 0.75rem;
   flex-wrap: wrap;
-  justify-content: center;
+  gap: 8px;
 }
 
 .category-btn {
-  padding: 0.75rem 1.5rem;
-  border: 2px solid var(--border-color);
-  background: transparent;
-  color: var(--text-color);
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .category-btn:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
   transform: translateY(-2px);
+  border-color: var(--color-accent);
+  color: var(--color-text);
 }
 
 .category-btn.active {
-  background: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-  box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.3);
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 15%, var(--color-surface));
+  color: var(--color-accent);
 }
 
-/* Projects Grid */
-.all-projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.project-card-clickable {
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.project-card-clickable:hover {
-  transform: translateY(-8px);
-}
-
-.project-card-clickable .card {
-  height: 100%;
-}
-
-/* No Projects Message */
 .no-projects {
   grid-column: 1 / -1;
+  padding: 48px 20px;
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  color: var(--color-muted);
   text-align: center;
-  padding: 3rem 1rem;
-  color: var(--text-secondary);
-  font-size: 1.1rem;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .all-projects-header h1 {
-    font-size: 2rem;
+@media (max-width: 700px) {
+  .archive-back-link {
+    margin-bottom: 28px;
   }
 
-  .all-projects-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .all-projects-page {
-    padding: 2rem 1rem;
+  .projects-page-header {
+    margin-bottom: 38px;
   }
 
-  .all-projects-header {
-    margin-bottom: 2rem;
-    padding: 1rem 0;
-  }
-
-  .all-projects-header h1 {
-    font-size: 1.8rem;
+  .category-filter {
+    margin-bottom: 22px;
   }
 
   .category-buttons {
-    gap: 0.5rem;
+    gap: 7px;
   }
 
   .category-btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-  }
-
-  .all-projects-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .all-projects-page {
-    padding: 1rem;
-  }
-
-  .all-projects-header h1 {
-    font-size: 1.5rem;
-  }
-
-  .all-projects-header p {
-    font-size: 1rem;
-  }
-
-  .category-buttons {
-    gap: 0.4rem;
-  }
-
-  .category-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-  }
-
-  .all-projects-grid {
-    grid-template-columns: 1fr;
+    min-height: 44px;
+    padding: 7px 11px;
+    font-size: 0.64rem;
   }
 }

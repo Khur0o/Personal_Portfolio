@@ -17,31 +17,37 @@ function ProjectCard({
 }: ProjectCardProps) {
   const imageSource = source ?? CardImg ?? ''
 
-  const handleClick = () => {
-    if (onClick) {
-      onClick()
-    } else if (slug) {
-      window.location.hash = `#/project/${slug}`
-    }
-  }
-
-  return (
-    <div className="card" onClick={handleClick} style={{ cursor: slug ? 'pointer' : 'default' }}>
+  const content = (
+    <>
       <div className="card-image-wrapper">
         <img
           className="card-image"
           src={imageSource}
-          alt={CardTitle}
+          alt=""
         />
       </div>
 
       <div className="card-details">
         <h2>{CardTitle}</h2>
-
         <p>{CardDescription}</p>
       </div>
-    </div>
+    </>
   )
+
+  if (slug) {
+    return (
+      <a
+        className="card"
+        href={`#/project/${slug}`}
+        onClick={onClick}
+        aria-label={`View ${CardTitle} project`}
+      >
+        {content}
+      </a>
+    )
+  }
+
+  return <div className="card">{content}</div>
 }
 
 export default ProjectCard

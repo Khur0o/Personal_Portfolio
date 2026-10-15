@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 const Header = () => {
   const [activeSection, setActiveSection] = useState<string>('Home')
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
+  const [currentHash, setCurrentHash] = useState(() => window.location.hash)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try {
       const saved = localStorage.getItem('theme')
@@ -19,6 +20,30 @@ const Header = () => {
   })
 
   useEffect(() => {
+    const updateHash = () => setCurrentHash(window.location.hash)
+
+    window.addEventListener('hashchange', updateHash)
+    window.addEventListener('popstate', updateHash)
+
+    return () => {
+      window.removeEventListener('hashchange', updateHash)
+      window.removeEventListener('popstate', updateHash)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (currentHash.startsWith('#/')) {
+      setActiveSection('Projects')
+      return
+    }
+
+    const hashSection = currentHash.slice(1)
+    const sectionIds = ['Home', 'About', 'Projects', 'Services', 'Contact']
+
+    if (sectionIds.includes(hashSection)) {
+      setActiveSection(hashSection)
+    }
+
     const sections = document.querySelectorAll('section')
     const options: IntersectionObserverInit = {
       rootMargin: '0px',
@@ -36,9 +61,9 @@ const Header = () => {
     sections.forEach((section) => observer.observe(section))
 
     return () => {
-      sections.forEach((section) => observer.unobserve(section))
+      observer.disconnect()
     }
-  }, [])
+  }, [currentHash])
 
   useEffect(() => {
     const root = document.documentElement
@@ -67,6 +92,11 @@ const Header = () => {
       return
     }
 
+    if (currentHash.startsWith('#/')) {
+      window.location.hash = section
+      return
+    }
+
     if (currentHash === `#${section}`) {
       const element = document.getElementById(section)
       element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -74,6 +104,7 @@ const Header = () => {
     }
 
     window.history.pushState(null, '', target)
+    setCurrentHash(window.location.hash)
     const element = document.getElementById(section)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })

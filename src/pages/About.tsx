@@ -138,36 +138,42 @@ function About() {
             APPROACH
         ========================== */}
         <aside className="about-approach animate-on-scroll">
-          <span className="about-kicker">
+          <span className="section-kicker">
             Approach
           </span>
+
           <h3>
-            Useful.
+            Think.
             <br />
-            Intentional.
+            Build.
             <br />
-            Memorable.
+            Experiment.
           </h3>
+
           <p>
-            I prefer solutions that have a reason
-            behind them — from architecture and
-            interaction to the smallest visual detail.
+            I enjoy understanding how things work, turning
+            ideas into functional systems, and experimenting
+            until the pieces come together.
           </p>
+
           <div className="approach-line">
             <span>01</span>
-            Understand
+            Explore
           </div>
+
           <div className="approach-line">
             <span>02</span>
-            Design
+            Understand
           </div>
+
           <div className="approach-line">
             <span>03</span>
-            Build
+            Create
           </div>
+
           <div className="approach-line">
             <span>04</span>
-            Refine
+            Improve
           </div>
         </aside>
       </div>

@@ -36,10 +36,10 @@ function Projects() {
 
       <div className="see-more-container">
         <a
-          href="/#/all-projects"
+          href="#/all-projects"
           className="see-more-link"
         >
-          <span>View all projects</span>
+          <span>Explore all projects</span>
         </a>
       </div>
     </section>

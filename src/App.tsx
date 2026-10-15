@@ -1,4 +1,4 @@
-import { useEffect, type ReactElement } from 'react'
+import { useEffect, useLayoutEffect, useState, type ReactElement } from 'react'
 import Header from './components/Header'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -7,10 +7,35 @@ import Services from './pages/Services'
 import Contact from './pages/Contact'
 import Footer from './components/Footer'
 import NotFound from './pages/NotFound'
-import AllProjects from './pages/AllProjects'
+import FullProjects from './pages/FullProjects'
 import ProjectDetail from './pages/ProjectDetail'
 
 function App(): ReactElement {
+  const [location, setLocation] = useState(() => ({
+    pathname: window.location.pathname,
+    hash: window.location.hash,
+  }))
+  const { pathname: currentPath, hash: currentHash } = location
+  const cleanHash = currentHash.replace('#', '')
+  const isRootPath = currentPath === '/' || currentPath === '/index.html'
+
+  useEffect(() => {
+    const updateLocation = () => {
+      setLocation({
+        pathname: window.location.pathname,
+        hash: window.location.hash,
+      })
+    }
+
+    window.addEventListener('hashchange', updateLocation)
+    window.addEventListener('popstate', updateLocation)
+
+    return () => {
+      window.removeEventListener('hashchange', updateLocation)
+      window.removeEventListener('popstate', updateLocation)
+    }
+  }, [])
+
   useEffect(() => {
     const animatedItems = document.querySelectorAll('.animate-on-scroll')
 
@@ -33,16 +58,16 @@ function App(): ReactElement {
     animatedItems.forEach((item) => observer.observe(item))
 
     return () => observer.disconnect()
-  }, [])
+  }, [location.pathname, location.hash])
 
-  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/'
-  const currentHash = typeof window !== 'undefined' ? window.location.hash : ''
-  const isRootPath = currentPath === '/' || currentPath === '/index.html'
+  useLayoutEffect(() => {
+    if (cleanHash.startsWith('/project/') || cleanHash === '/all-projects') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+  }, [cleanHash, currentPath])
 
   useEffect(() => {
     if (!currentHash) return
-
-    const cleanHash = currentHash.replace('#', '')
 
     // Handle special routes
     if (cleanHash.startsWith('/project/') || cleanHash === '/all-projects') {
@@ -52,22 +77,25 @@ function App(): ReactElement {
     const target = document.getElementById(cleanHash)
     if (!target) return
 
+    let secondFrame = 0
     const frame = window.requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      secondFrame = window.requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
     })
 
-    return () => window.cancelAnimationFrame(frame)
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.cancelAnimationFrame(secondFrame)
+    }
   }, [currentHash, currentPath])
-
-  // Determine which page to show
-  const cleanHash = currentHash.replace('#', '')
 
   // Show Project Detail page
   if (cleanHash.startsWith('/project/')) {
     return (
       <>
         <Header />
-        <ProjectDetail />
+        <ProjectDetail slug={cleanHash.slice('/project/'.length)} />
         <Footer />
       </>
     )
@@ -78,7 +106,7 @@ function App(): ReactElement {
     return (
       <>
         <Header />
-        <AllProjects />
+        <FullProjects />
         <Footer />
       </>
     )

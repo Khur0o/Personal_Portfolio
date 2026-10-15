@@ -108,7 +108,7 @@ function Contact() {
                 setError('')
                 setRevealed(false)
               }}
-              placeholder="Enter Your Email"
+              placeholder="Enter Your Email (sample@email.com)"
               autoComplete="email"
               aria-invalid={!!error}
               aria-describedby={

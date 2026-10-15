@@ -16,46 +16,60 @@ function AllProjects() {
       : ProjectsLists.filter((project) => project.category === activeCategory)
 
   return (
-    <div className="all-projects-page">
-      <div className="all-projects-header">
-        <h1>All Projects</h1>
-        <p>Explore my complete portfolio of projects across different categories</p>
+    <main className="ProjectsPage">
+      <a href="#Projects" className="archive-back-link">
+        <span aria-hidden="true">←</span> Back to portfolio
+      </a>
+
+      <header className="projects-page-header">
+        <span className="projects-kicker">Project Archive / 01</span>
+        <h1>
+          All
+          <span> Projects.</span>
+        </h1>
+        <p>
+          A collection of projects I've built, experimented with, and
+          contributed to across software engineering, game development,
+          and creative technology.
+        </p>
+      </header>
+
+      <div className="projects-page-meta">
+        <span>PROJECT ARCHIVE</span>
+        <span>
+          {filteredProjects.length.toString().padStart(2, '0')} OF{' '}
+          {ProjectsLists.length.toString().padStart(2, '0')} PROJECTS
+        </span>
       </div>
 
-      <div className="category-filter">
+      <nav className="category-filter" aria-label="Filter projects by category">
         <div className="category-buttons">
           {categories.map((category) => (
             <button
               key={category}
+              type="button"
               className={`category-btn ${activeCategory === category ? 'active' : ''}`}
               onClick={() => setActiveCategory(category)}
+              aria-pressed={activeCategory === category}
             >
               {category}
             </button>
           ))}
         </div>
-      </div>
+      </nav>
 
-      <div className="all-projects-grid">
+      <div className="project-grid project-grid-full">
         {filteredProjects.length > 0 ? (
           filteredProjects.map((project, index) => (
-            <div
-              key={`${project.slug}-${index}`}
-              onClick={() => {
-                window.location.hash = `/project/${project.slug}`
-              }}
-              className="project-card-clickable"
-            >
-              <ProjectCard {...project} />
-            </div>
+            <ProjectCard key={`${project.slug}-${index}`} {...project} />
           ))
         ) : (
           <div className="no-projects">
-            <p>No projects found in this category</p>
+            <p>No projects found in this category.</p>
           </div>
         )}
       </div>
-    </div>
+    </main>
   )
 }
 
